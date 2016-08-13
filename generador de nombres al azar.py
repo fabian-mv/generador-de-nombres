@@ -32,7 +32,7 @@ listaEstudiantesDIC = {}
 global historial
 historial = ""
 
-
+#asdfasdf#
 #-------------------------------------------LÓGICA-------------------------------------------#
 def nightMode():    #PASA A NIGHTMODE O A LIGHTMODE
     if nm == False:
