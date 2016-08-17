@@ -2,7 +2,7 @@
 #   _____ ______ _   _ ______ _____            _____   ____  _____     _____  ______                     #
 #  / ____|  ____| \ | |  ____|  __ \     /\   |  __ \ / __ \|  __ \   |  __ \|  ____|                    #
 # | |  __| |__  |  \| | |__  | |__) |   /  \  | |  | | |  | | |__) |  | |  | | |__      diseñado por:    #
-# | | |_ |  __| | . ` |  __| |  _  /   / /\ \ | |  | | |  | |  _  /   | |  | |  __|     Fabián Montero   #              #
+# | | |_ |  __| | . ` |  __| |  _  /   / /\ \ | |  | | |  | |  _  /   | |  | |  __|     Fabián Montero   #
 # | |__| | |____| |\  | |____| | \ \  / ____ \| |__| | |__| | | \ \   | |__| | |____                     #
 #  \_____|______|_| \_|______|_|__\_\/_/__  \_\_____/ \____/|_|  \_\  |_____/|______|___         _____   #
 # | \ | |/ __ \|  \/  |  _ \|  __ \|  ____|/ ____|      /\   | |           /\    |___  /   /\   |  __ \  #
@@ -20,10 +20,8 @@ from tkinter import *
 import os.path
 import random
 
-global nm
 nm = False
 
-global mh
 mh = False
 
 global listaEstudiantesDIC
@@ -35,8 +33,8 @@ historial = ""
 
 #-------------------------------------------LÓGICA-------------------------------------------#
 def nightMode():    #PASA A NIGHTMODE O A LIGHTMODE
+    global nm
     if nm == False:
-        global nm
         nm = True
         main.configure(background = "#3F3F3F")
         labelRESULTADO.config(background = "#3F3F3F"  , foreground = "white")
@@ -45,7 +43,6 @@ def nightMode():    #PASA A NIGHTMODE O A LIGHTMODE
         buttonGENERAR.config(background = "#e5e5e5")
         
     else:
-        global nm
         nm = False
         main.configure(background = "#F0F0F0")
         labelRESULTADO.config(background = "#F0F0F0"  , foreground = "black")
@@ -54,13 +51,12 @@ def nightMode():    #PASA A NIGHTMODE O A LIGHTMODE
         buttonGENERAR.config(background = "#F0F0F0")
 
 def mostrarHistorial():     #MUESTRA U OCULTA EL HISTORIAL
+    global mh
     if mh == False:
-        global mh
         mh = True
         labelHISTORIAL.config(text = "HISTORIAL\n" + historial)
 
     else:
-        global mh
         mh = False
         labelHISTORIAL.config(text = "")
 
