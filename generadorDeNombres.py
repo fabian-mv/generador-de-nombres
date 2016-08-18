@@ -16,7 +16,16 @@
 
 """
 #------------------------------BIBLIOTECAS Y VARIABLES GLOBALES------------------------------#
-from tkinter import *
+from tkinter import simpledialog
+from tkinter import Tk
+from tkinter import Label
+from tkinter import N
+from tkinter import W
+from tkinter import S
+from tkinter import E
+from tkinter import Button
+from tkinter import Menu
+
 import os.path
 import random
 
