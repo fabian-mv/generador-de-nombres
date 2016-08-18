@@ -13,20 +13,21 @@
 #                                                                                                        #
 ##########################################################################################################
 """
-
+"So much of life, it seems to me, is determined by pure randomness."
+                                                 -Sidney Poitier
 """
 #------------------------------BIBLIOTECAS Y VARIABLES GLOBALES------------------------------#
-from tkinter import simpledialog
 from tkinter import Tk
-from tkinter import Label
 from tkinter import N
-from tkinter import W
 from tkinter import S
 from tkinter import E
+from tkinter import W
 from tkinter import Button
+from tkinter import Label
 from tkinter import Menu
 from tkinter import filedialog
 from tkinter import messagebox
+from tkinter import simpledialog
 
 import os.path
 import random
