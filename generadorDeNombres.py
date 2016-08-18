@@ -26,6 +26,7 @@ from tkinter import E
 from tkinter import Button
 from tkinter import Menu
 from tkinter import filedialog
+from tkinter import messagebox
 
 import os.path
 import random
@@ -69,52 +70,60 @@ def mostrarHistorial():     #MUESTRA U OCULTA EL HISTORIAL
         labelHISTORIAL.config(text = "")
 
 def crearGrupo():   #CEA UN GRUPO NUEVO
-    global ini
-    global nombreGrupoNuevo
-    global texto
-    ini = 0
-    #PIDE AL USUARIO EL NOMBRE DEL GRUPO NUEVO Y LOS ESTUDIANTES QUE LO INTEGRAN
-    nombreGrupoNuevo = simpledialog.askstring("Crear Grupo" , "Nombre del grupo nuevo:              " , parent = main)
-    nombreGrupoNuevo += ".txt"
-    grupoNuevo = simpledialog.askstring("Crear Grupo" , "Introduzca una lista de estudiantes (nombres) separados por comas <,>." , parent = main)
+    try:
+        global ini
+        global nombreGrupoNuevo
+        global texto
+        ini = 0
+        #PIDE AL USUARIO EL NOMBRE DEL GRUPO NUEVO Y LOS ESTUDIANTES QUE LO INTEGRAN
+        nombreGrupoNuevo = simpledialog.askstring("Crear Grupo" , "Nombre del grupo nuevo:              " , parent = main)
+        nombreGrupoNuevo += ".txt"
+        grupoNuevo = simpledialog.askstring("Crear Grupo" , "Introduzca una lista de estudiantes (nombres) separados por comas <,>." , parent = main)
 
-    #CREA EL ARCHIVO DEL GRUPO NUEVO
-    archivoGrupoNuevo = open(nombreGrupoNuevo , "w+")
-    archivoGrupoNuevo.close()
+        #CREA EL ARCHIVO DEL GRUPO NUEVO
+        archivoGrupoNuevo = open(nombreGrupoNuevo , "w+")
+        archivoGrupoNuevo.close()
 
-    #GENERA EL TEXTO PARA ESCRIBIR EN EL ARCHIVO DEL GRUPO NUEVO
-    contador = 1
-    texto = ""
-    for letra in grupoNuevo:
-        if letra == ",":
-            texto += "," + str(contador) + "\n"
-            contador += 1
+        #GENERA EL TEXTO PARA ESCRIBIR EN EL ARCHIVO DEL GRUPO NUEVO
+        contador = 1
+        texto = ""
+        for letra in grupoNuevo:
+            if letra == ",":
+                texto += "," + str(contador) + "\n"
+                contador += 1
 
-        else:
-            texto += letra
-    texto += "," + str(contador) + "\n"
+            else:
+                texto += letra
+        texto += "," + str(contador) + "\n"
 
-    #ESCRIBE EN EL ARCHIVO DEL GRUPO NUEVO
-    escribirAlFinal(nombreGrupoNuevo , texto)
+        #ESCRIBE EN EL ARCHIVO DEL GRUPO NUEVO
+        escribirAlFinal(nombreGrupoNuevo , texto)
 
-    inicializar()
+        inicializar()
+        
+    except TypeError:
+        None
 
 def cargar():   #CARGA UN GRUPO EXISTENTE
-    global ini
-    global nombresCSV
-    global grupoActual
-    ini = 1
-    
-    #PIDE AL USUARIO LA UBICACION DEL ARCHIVO DEL GRUPO
-    ubicacion = filedialog.askopenfilename(filetypes = (("TXT" , "*.txt") , ("CSV" , "*.csv")) , title = "Seleccione un archivo de grupo para cargar.")    
+    try:
+        global ini
+        global nombresCSV
+        global grupoActual
+        ini = 1
+        
+        #PIDE AL USUARIO LA UBICACION DEL ARCHIVO DEL GRUPO
+        ubicacion = filedialog.askopenfilename(filetypes = (("TXT" , "*.txt") , ("CSV" , "*.csv")) , title = "Seleccione un archivo de grupo para cargar.")    
 
-    #CARGA EL ARCHIVO CSV
-    nombresCSV0 = open(ubicacion , "r")
-    nombresCSV = nombresCSV0.read()  #STRING CON EL ARCHIVO CSV
-    grupoActual = os.path.basename(ubicacion)#STRING CON EL NOMBRE DEL GRUPO ACTUAL
-    grupoActual = grupoActual[:-4]
+        #CARGA EL ARCHIVO CSV
+        nombresCSV0 = open(ubicacion , "r")
+        nombresCSV = nombresCSV0.read()  #STRING CON EL ARCHIVO CSV
+        grupoActual = os.path.basename(ubicacion)#STRING CON EL NOMBRE DEL GRUPO ACTUAL
+        grupoActual = grupoActual[:-4]
 
-    inicializar()
+        inicializar()
+
+    except FileNotFoundError:
+        None
 
 def inicializar():  #INICIALIZA UN GRUPO
     #LIMPIA EL HISTORIAL
@@ -175,18 +184,23 @@ def inicializar():  #INICIALIZA UN GRUPO
 
 
 def generar():  #GENERA EL NOMBRE DE UN ESTUDIANTE AL AZAR
-    global historial
-    #GENERA UN NUMERO AL AZAR
-    rango = len(listaEstudiantesDIC)
-    resultado = random.randint(1 , rango)
+    try:
+        global historial
+        #GENERA UN NUMERO AL AZAR
+        rango = len(listaEstudiantesDIC)
+        resultado = random.randint(1 , rango)
 
-    #GENERA UN NOMBRE USANDO EL NUMERO
-    labelRESULTADO.config(text = str(listaEstudiantesDIC[resultado]))
+        #GENERA UN NOMBRE USANDO EL NUMERO
+        labelRESULTADO.config(text = str(listaEstudiantesDIC[resultado]))
 
-    #ACTUALIZA EL HISTORIAL
-    historial += str(listaEstudiantesDIC[resultado]) + "\n"
-    mostrarHistorial()
-    mostrarHistorial()
+        #ACTUALIZA EL HISTORIAL
+        historial += str(listaEstudiantesDIC[resultado]) + "\n"
+        mostrarHistorial()
+        mostrarHistorial()
+
+    except NameError:
+        print("Error: Debe tener un archivo de grupo cargado para poder generar nombres. Vaya a Archivo > Cargar Grupo...")
+        messagebox.showerror("Error", "Debe tener un archivo de grupo cargado para poder generar nombres.\nVaya a\nArchivo > Cargar Grupo...")
 
 def escribirAlFinal(nombreArchivo , texto):    #EXCRIBE AL FINAL DEL ARCHIVO
     archivo = open(nombreArchivo , "r+")
