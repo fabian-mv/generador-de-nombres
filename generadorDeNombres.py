@@ -20,14 +20,9 @@ from tkinter import *
 import os.path
 import random
 
-nm = False
-
-mh = False
-
-ini = 2
-
-global listaEstudiantesDIC
-listaEstudiantesDIC = {}
+nm = False #VARIABLE PARA NIGHTMODE
+mh = False  #VARIABLE PARA MOSTRAR HISTORIAL
+ini = 2    #VARIABLE PARA DEFINIT EL TIPO DE INICIALIZACION
 
 global historial
 historial = ""
@@ -98,8 +93,6 @@ def cargar():   #CARGA UN GRUPO EXISTENTE
     global nombresCSV
     global grupoActual
     ini = 1
-    #LIMPIA EL HISTORIAL
-    historial = ""
     
     #PIDE AL USUARIO LA UBICACION DEL ARCHIVO DEL GRUPO
     ubicacion = filedialog.askopenfilename(filetypes = (("TXT" , "*.txt") , ("CSV" , "*.csv")) , title = "Seleccione un archivo de grupo para cargar.")    
@@ -112,7 +105,10 @@ def cargar():   #CARGA UN GRUPO EXISTENTE
 
     inicializar()
 
-def inicializar():
+def inicializar():  #INICIALIZA UN GRUPO
+    #LIMPIA EL HISTORIAL
+    historial = ""
+
     global listaEstudiantesDIC
     if ini == 0:
         # ACTUALIZA LA INTERFAZ GRÁFICA
@@ -167,7 +163,6 @@ def inicializar():
 
 
 def generar():  #GENERA EL NOMBRE DE UN ESTUDIANTE AL AZAR
-    global historial
     #GENERA UN NUMERO AL AZAR
     rango = len(listaEstudiantesDIC)
     resultado = random.randint(1 , rango)
