@@ -48,6 +48,7 @@ def nightMode():    #PASA A NIGHTMODE O A LIGHTMODE
         buttonGENERAR.config(background = "#F0F0F0")
 
 def mostrarHistorial():     #MUESTRA U OCULTA EL HISTORIAL
+    global historial
     global mh
     if mh == False:
         mh = True
@@ -107,6 +108,7 @@ def cargar():   #CARGA UN GRUPO EXISTENTE
 
 def inicializar():  #INICIALIZA UN GRUPO
     #LIMPIA EL HISTORIAL
+    global historial
     historial = ""
 
     global listaEstudiantesDIC
@@ -163,6 +165,7 @@ def inicializar():  #INICIALIZA UN GRUPO
 
 
 def generar():  #GENERA EL NOMBRE DE UN ESTUDIANTE AL AZAR
+    global historial
     #GENERA UN NUMERO AL AZAR
     rango = len(listaEstudiantesDIC)
     resultado = random.randint(1 , rango)
