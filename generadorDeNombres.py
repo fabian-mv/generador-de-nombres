@@ -85,11 +85,31 @@ def crearGrupo():   #CEA UN GRUPO NUEVO
     #ESCRIBE EN EL ARCHIVO DEL GRUPO NUEVO
     escribirAlFinal(nombreGrupoNuevo , texto)
 
-    inicializar()
+    #ACTUALIZA LA INTERFAZ GRÁFICA
+    labelGRUPO.config(text = "Grupo Actual:\n" + nombreGrupoNuevo[:-4])
+
+    #GENERA EL DICCIONARIO CON LA LISTA DE LOS ESTUDIANTES
+    global listaEstudiantesDIC
+    listaEstudiantesDIC = {}
+    nombre = ""
+    numero = ""
+    for letra in texto:
+        if letra.isalpha():
+            nombre += letra            
+
+        elif letra.isdecimal():
+            numero += letra
+
+        elif letra == "\n":
+            listaEstudiantesDIC[int(numero)] = nombre
+            nombre = ""
+            numero = ""
+
+        else:
+            None
+    print(listaEstudiantesDIC)
 
 def cargar():   #CARGA UN GRUPO EXISTENTE
-    global grupoActual
-    global nombresCSV
     #LIMPIA EL HISTORIAL
     historial = ""
     
@@ -102,9 +122,6 @@ def cargar():   #CARGA UN GRUPO EXISTENTE
     grupoActual = os.path.basename(ubicacion)#STRING CON EL NOMBRE DEL GRUPO ACTUAL
     grupoActual = grupoActual[:-4]
 
-    inicializar()
-
-def inicializar():
     #ACTUALIZA LA INTERFAZ GRÁFICA
     labelGRUPO.config(text = "Grupo Actual:\n" + grupoActual)
 
@@ -128,7 +145,6 @@ def inicializar():
         else:
             None
     print(listaEstudiantesDIC)
-
 
 def generar():  #GENERA EL NOMBRE DE UN ESTUDIANTE AL AZAR
     global historial
