@@ -1,6 +1,0 @@
-manuel,1
-antonio,2
-juan,3
-pancho,4
-david,5
-julio,6

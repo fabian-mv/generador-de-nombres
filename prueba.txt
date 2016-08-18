@@ -1,6 +1,0 @@
-asdf,1
-teh,2
-cvb,3
-erg,4
-qwerg,5
-asdf,6
